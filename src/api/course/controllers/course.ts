@@ -28,5 +28,17 @@ export default factories.createCoreController(
       const sanitizedResults = await this.sanitizeOutput!(results, ctx);
       return this.transformResponse!(sanitizedResults, { pagination });
     },
+
+    async findByUrlKey(ctx) {
+      const { urlKey } = ctx.params;
+      const course = await strapi
+        .service("api::course.course")
+        .findPublishedByUrlKey(urlKey);
+      if (!course) {
+        return ctx.notFound("Course not found");
+      }
+      const sanitizedCourse = await this.sanitizeOutput!(course, ctx);
+      return this.transformResponse!(sanitizedCourse);
+    },
   }),
 );

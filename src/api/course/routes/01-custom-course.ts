@@ -8,6 +8,11 @@ const routes: Core.RouterConfig = {
             path: "/courses/by-level/:level",
             handler: "api::course.course.findByLevel",
         },
+        {
+            method: "GET",
+            path: "/courses/by-url-key/:urlKey",
+            handler: "api::course.course.findByUrlKey",
+        }
     ],
 };
 

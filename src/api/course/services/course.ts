@@ -14,4 +14,14 @@ export default factories.createCoreService("api::course.course", () => ({
       status: "published",
     });
   },
+
+  async findPublishedByUrlKey(urlKey: string) {
+    const { results } = await super.find({
+      filters: {
+        urlKey,
+      },
+      status: "published",
+    });
+    return results[0];
+  },
 }));
