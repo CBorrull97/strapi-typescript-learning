@@ -39,6 +39,12 @@
       "type": "integer",
       "required": true,
       "min": 1
+    },
+    "lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson.lesson",
+      "mappedBy": "course"
     }
   }
 }

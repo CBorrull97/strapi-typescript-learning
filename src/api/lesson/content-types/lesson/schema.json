@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lessons",
+  "info": {
+    "singularName": "lesson",
+    "pluralName": "lessons",
+    "displayName": "Lesson"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "durationMinutes": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "lessons"
+    }
+  }
+}

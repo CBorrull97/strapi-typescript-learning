@@ -21,6 +21,11 @@ export default factories.createCoreService("api::course.course", () => ({
         urlKey,
       },
       status: "published",
+      populate: {
+        lessons: {
+          sort: ["position:asc"],
+        },
+      },
     });
     return results[0];
   },
