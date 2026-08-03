@@ -10,9 +10,15 @@ export interface CourseStats {
 }
 
 export function calculateTotalDuration(lessons: LessonDuration[]): number {
+/*
   let total = 0;
   for (const lesson of lessons) {
     total += lesson.durationMinutes;
   }
   return total;
+  */
+  return lessons.reduce(
+    (total, lesson) => total + lesson.durationMinutes,
+    0,
+  );
 }
