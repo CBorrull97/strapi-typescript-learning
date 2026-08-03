@@ -12,6 +12,11 @@ const routes: Core.RouterConfig = {
             method: "GET",
             path: "/courses/by-url-key/:urlKey",
             handler: "api::course.course.findByUrlKey",
+        },
+        {
+            method: "GET",
+            path: "/courses/by-url-key/:urlKey/stats",
+            handler: "api::course.course.getStatsByUrlKey",
         }
     ],
 };

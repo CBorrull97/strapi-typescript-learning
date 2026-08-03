@@ -40,5 +40,16 @@ export default factories.createCoreController(
       const sanitizedCourse = await this.sanitizeOutput!(course, ctx);
       return this.transformResponse!(sanitizedCourse);
     },
+
+    async getStatsByUrlKey(ctx) {
+      const { urlKey } = ctx.params;
+      const stats = await strapi
+        .service("api::course.course")
+        .getStatsByUrlKey(urlKey);
+      if (stats === undefined) {
+        return ctx.notFound("Course not found");
+      }
+      return this.transformResponse!(stats);
+    },
   }),
 );
