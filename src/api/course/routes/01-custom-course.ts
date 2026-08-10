@@ -18,14 +18,7 @@ const routes: Core.RouterConfig = {
             path: "/courses/by-url-key/:urlKey/stats",
             handler: "api::course.course.getStatsByUrlKey",
             config: {
-                policies: [
-                    {
-                        name: "api::course.require-stats-key",
-                        config: {
-                            key: "typescript-learning",
-                        },
-                    },
-                ],
+                policies: ["api::course.require-stats-key"],
                 middlewares: ["api::course.response-time"],
             },
         },

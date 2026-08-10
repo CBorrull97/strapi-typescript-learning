@@ -1,16 +1,18 @@
 import type { Core } from "@strapi/strapi";
 
-interface RequireStatsKeyConfig {
-  key: string;
-}
-
-const requireStatsKey: Core.PolicyHandler<RequireStatsKeyConfig> = (
+const requireStatsKey: Core.PolicyHandler = (
   policyContext,
-  config,
+  _config,
+  { strapi },
 ) => {
   const receivedKey = policyContext.request.headers["x-stats-key"];
 
-  return receivedKey === config.key;
+  const expectedKey = strapi.config.get<string | undefined>("course.statsKey");
+  return (
+    typeof expectedKey === "string" &&
+    expectedKey.length > 0 &&
+    receivedKey === expectedKey
+  );
 };
 
 export default requireStatsKey;
