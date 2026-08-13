@@ -1,0 +1,17 @@
+import type { Core } from "@strapi/strapi";
+
+const logRouteErrors: Core.MiddlewareFactory = (_config, { strapi }) => {
+  return async (ctx, next) => {
+    try {
+      await next();
+    } catch (error) {
+      strapi.log.error(
+        `Course request failed: ${ctx.method} ${ctx.url}`,
+        error,
+      );
+      throw error;
+    }
+  };
+};
+
+export default logRouteErrors;
