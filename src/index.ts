@@ -1,4 +1,4 @@
-// import type { Core } from '@strapi/strapi';
+import type { Core } from "@strapi/strapi";
 
 export default {
   /**
@@ -7,8 +7,19 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+  register({ strapi }: { strapi: Core.Strapi }) {
+    strapi.documents.use(async (context, next) => {
+      const result = await next();
+      if (
+        context.uid === "api::lesson.lesson" &&
+        ["create", "update"].includes(context.action)
+      ) {
+        strapi.log.info(`Lesson document operation succeeded: ${context.action}`);
+      }
 
+      return result;
+    });
+  },
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
