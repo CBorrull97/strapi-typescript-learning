@@ -5,8 +5,12 @@ const logRouteErrors: Core.MiddlewareFactory = (_config, { strapi }) => {
     try {
       await next();
     } catch (error) {
+      const requestId =
+        typeof ctx.state.requestId === "string"
+          ? ctx.state.requestId
+          : "unknown";
       strapi.log.error(
-        `Course request failed: ${ctx.method} ${ctx.url}`,
+        `[requestId=${requestId}] Course request failed: ${ctx.method} ${ctx.url}`,
         error,
       );
       throw error;
