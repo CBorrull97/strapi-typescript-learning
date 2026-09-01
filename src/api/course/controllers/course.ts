@@ -51,5 +51,22 @@ export default factories.createCoreController(
       }
       return this.transformResponse!(stats);
     },
+
+    async authCheck(ctx) {
+      const user = ctx.state.user;
+
+      if (!user) {
+        return ctx.unauthorized("Authentication required");
+      }
+
+      return {
+        data: {
+          id: user.id,
+          documentId: user.documentId,
+          username: user.username,
+          email: user.email,
+        },
+      };
+    },
   }),
 );

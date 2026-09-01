@@ -5,6 +5,11 @@ const routes: Core.RouterConfig = {
   routes: [
     {
       method: "GET",
+      path: "/courses/auth-check",
+      handler: "api::course.course.authCheck",
+    },
+    {
+      method: "GET",
       path: "/courses/by-level/:level",
       handler: "api::course.course.findByLevel",
     },
