@@ -23,5 +23,15 @@ export default factories.createCoreController(
       const sanitizedResults = await this.sanitizeOutput!(announcements, ctx);
       return this.transformResponse!(sanitizedResults);
     },
+
+    async countByCourse(ctx) {
+      const { courseDocumentId } = ctx.params;
+      const announcementCount = await strapi
+        .service("api::announcement.announcement")
+        .countByCourse(courseDocumentId);
+      return this.transformResponse!({
+        count: announcementCount,
+      });
+    },
   }),
 );

@@ -56,5 +56,18 @@ export default factories.createCoreService(
       }
       return deactivatedAnnouncements;
     },
+
+    async countByCourse(courseDocumentId: string): Promise<number> {
+      const announcementCount = await strapi.db
+        .query("api::announcement.announcement")
+        .count({
+          where: {
+            course: {
+              documentId: courseDocumentId,
+            },
+          },
+        });
+      return announcementCount;
+    },
   }),
 );

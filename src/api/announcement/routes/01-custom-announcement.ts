@@ -12,6 +12,14 @@ const routes: Core.RouterConfig = {
       method: "GET",
       path: "/announcements/active/:courseDocumentId",
       handler: "api::announcement.announcement.findActiveByCourse",
+      config: {
+        middlewares: ["api::announcement.cache-control"],
+      },
+    },
+    {
+      method: "GET",
+      path: "/announcements/count/:courseDocumentId",
+      handler: "api::announcement.announcement.countByCourse",
     },
   ],
 };
