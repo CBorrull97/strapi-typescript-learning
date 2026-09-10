@@ -7,6 +7,9 @@ const routes: Core.RouterConfig = {
       method: "GET",
       path: "/announcements/expired",
       handler: "api::announcement.announcement.findExpiredActive",
+      config: {
+        policies: ["api::announcement.require-expired-key"],
+      },
     },
     {
       method: "GET",

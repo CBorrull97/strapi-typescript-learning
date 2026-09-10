@@ -4,6 +4,7 @@ const config: Core.Config.Middlewares = [
   'strapi::logger',
   'strapi::errors',
   'global::request-id',
+  "global::api-request-logger",
   'strapi::security',
   'strapi::cors',
   'strapi::poweredBy',
