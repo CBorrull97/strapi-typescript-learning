@@ -24,6 +24,16 @@ const routes: Core.RouterConfig = {
       path: "/announcements/count/:courseDocumentId",
       handler: "api::announcement.announcement.countByCourse",
     },
+    {
+      method: "GET",
+      path: "/announcements/search",
+      handler: "api::announcement.announcement.searchByTitle",
+    },
+    {
+      method: "PUT",
+      path: "/announcements/:documentId/active",
+      handler: "api::announcement.announcement.setActive",
+    },
   ],
 };
 

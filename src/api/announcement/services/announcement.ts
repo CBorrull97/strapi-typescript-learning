@@ -69,5 +69,33 @@ export default factories.createCoreService(
         });
       return announcementCount;
     },
+
+    async searchByTitle(searchText: string) {
+      const announcements = await strapi
+        .documents("api::announcement.announcement")
+        .findMany({
+          filters: {
+            title: {
+              $containsi: searchText,
+            },
+          },
+          sort: {
+            title: "asc",
+          },
+        });
+      return announcements;
+    },
+
+    async setActive(documentId: string, active: boolean) {
+      const updatedAnnouncement = await strapi
+        .documents("api::announcement.announcement")
+        .update({
+          documentId,
+          data: {
+            active,
+          },
+        });
+      return updatedAnnouncement;
+    },
   }),
 );
